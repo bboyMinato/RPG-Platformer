@@ -6,10 +6,7 @@
 #include "Vector2D.h"
 #include "Camera.h"
 
-#define UPWARD_FORCE -1.f
-#define DOWNARD_FORCE 1.f
-#define BACKWARD_FORCE -1
-#define FORWARD_FORCE 1.f
+
 #define RUN_FORCE 1.5f
 #define JUMP_TIME 20.0f
 #define JUMP_FORCE 4.f
