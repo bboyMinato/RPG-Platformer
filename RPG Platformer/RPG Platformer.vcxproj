@@ -188,6 +188,9 @@
     <Image Include="res\img\oak_wood\background\background_layer_3.png" />
     <Image Include="res\img\oak_wood\character\char_blue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\img\oak_wood\textures.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

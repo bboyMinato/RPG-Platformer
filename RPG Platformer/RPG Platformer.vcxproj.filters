@@ -143,4 +143,7 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\img\oak_wood\textures.xml" />
+  </ItemGroup>
 </Project>

@@ -33,10 +33,7 @@ void Engine::Init()
 
 	_levelMap = MapParser::GetInstance()->GetMap("Level");
 
-	TextureManager::GetInstance()->LoadTexture("background_layer_1", "res/img/oak_wood/background/background_layer_1.png");
-	TextureManager::GetInstance()->LoadTexture("background_layer_2", "res/img/oak_wood/background/background_layer_2.png");
-	TextureManager::GetInstance()->LoadTexture("background_layer_3", "res/img/oak_wood/background/background_layer_3.png");
-	TextureManager::GetInstance()->LoadTexture("player", "res/img/oak_wood/character/char_blue.png");
+	TextureManager::GetInstance()->ParseTextures("res/img/oak_wood/textures.xml");	
 
 	player = new Warrior(new Properties("player", 100, 200, 56, 56));
 
@@ -72,9 +69,9 @@ void Engine::Render()
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 	SDL_RenderClear(_renderer);
 
-	TextureManager::GetInstance()->Draw("background_layer_1", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	TextureManager::GetInstance()->Draw("background_layer_2", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	TextureManager::GetInstance()->Draw("background_layer_3", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	TextureManager::GetInstance()->Draw("background_layer_1", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.2);
+	TextureManager::GetInstance()->Draw("background_layer_2", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.3);
+	TextureManager::GetInstance()->Draw("background_layer_3", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.4);
 
 	_levelMap->Render();
 	player->Draw();
