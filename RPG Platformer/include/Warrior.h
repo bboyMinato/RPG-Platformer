@@ -6,8 +6,14 @@
 #include "Vector2D.h"
 #include "Camera.h"
 
-#define JUMP_TIME 20.0f;
-#define JUMP_FORCE 4.f;
+#define UPWARD_FORCE -1.f
+#define DOWNARD_FORCE 1.f
+#define BACKWARD_FORCE -1
+#define FORWARD_FORCE 1.f
+#define RUN_FORCE 1.5f
+#define JUMP_TIME 20.0f
+#define JUMP_FORCE 4.f
+#define ATTACK_TIME 10.f
 
 class Warrior : public Character
 {
@@ -19,10 +25,16 @@ public:
 	virtual void Update(float dt);
 	virtual void Clean();
 
-private:
-	bool _isJumping = false;
-	bool _isGrounded = true;
+	void AnimationState();
 
+private:
+	bool _isRunning = false;
+	bool _isJumping = false;
+	bool _isFalling = false;
+	bool _isGrounded = false;
+	bool _isAttacking = false;
+
+	float _attackTime = 1.f;
 	float _jumpTime = 1.f;
 	float _jumpForce = 1.f;
 

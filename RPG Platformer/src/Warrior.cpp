@@ -11,8 +11,9 @@ Warrior::Warrior(Properties* props) : Character(props)
 	_rigidBody = new RigidBody();
 	_rigidBody->SetGravity(1.5f);
 
+	_attackTime = ATTACK_TIME;
 	_jumpForce = JUMP_FORCE;
-	_jumpTime = JUMP_TIME;
+	_jumpTime = JUMP_TIME;	
 
 	_collider = new Collider();
 	_collider->SetBuffer(-55, -70, 0, -40);
@@ -20,62 +21,81 @@ Warrior::Warrior(Properties* props) : Character(props)
 
 void Warrior::Draw()
 {
-	_animation->Draw(_transform->X, _transform->Y, _width, _height);
+	_animation->Draw(_transform->X, _transform->Y, _width, _height, _flip);
 
 	Vector2D cam = Camera::GetInstance()->GetPosition();
 
 	SDL_Rect box = _collider->GetBox();
-
 	box.x -= cam.X;
 	box.y -= cam.Y;
-
 	SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &box);
 }
 
 void Warrior::Update(float dt)
 {
-	if (_animation->_flip == SDL_FLIP_HORIZONTAL)
-		_animation->SetProps(_textureID, 0, 6, 60, SDL_FLIP_HORIZONTAL);
-
-	else
-		_animation->SetProps(_textureID, 0, 6, 60);
+	_isRunning = false;
 
 	_rigidBody->UnsetForce();
 	_rigidBody->SetGravity(2);
 
+	// run backward
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A))
-	{
-		_animation->SetProps(_textureID, 2, 8, 60, SDL_FLIP_HORIZONTAL);
-		_rigidBody->ApplyForceX(-1);
+	{						
+		_rigidBody->ApplyForceX(BACKWARD_FORCE * RUN_FORCE);
+		_isRunning = true;
+		_flip = SDL_FLIP_HORIZONTAL;
 	}
 
+	// run forward
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D))
-	{
-		_animation->SetProps(_textureID, 2, 8, 60);
-		_rigidBody->ApplyForceX(1);
+	{	
+		_rigidBody->ApplyForceX(FORWARD_FORCE * RUN_FORCE);
+		_isRunning = true;
+		_flip = SDL_FLIP_NONE;
 	}
 
-	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && _isGrounded)
+	// attack
+	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE))
 	{
-		_animation->SetProps(_textureID, 3, 8, 60);
+		_rigidBody->UnsetForce();
+		_isAttacking = true;		
+	}
 
+	// jump
+	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_W) && _isGrounded)
+	{
+		_rigidBody->ApplyForceY(UPWARD_FORCE * _jumpForce);
 		_isJumping = true;
-		_isGrounded = false;
-		_rigidBody->ApplyForceY(-1 * _jumpForce);
+		_isGrounded = false;			
 	}
 
-	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && _isJumping && _jumpTime > 0)
+	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_W) && _isJumping && _jumpTime > 0)
 	{
-		_animation->SetProps(_textureID, 4, 8, 60);
-
-		_jumpTime -= 0.5f;
-		_rigidBody->ApplyForceY(-1 * _jumpForce);
+		_jumpTime -= dt;
+		_rigidBody->ApplyForceY(UPWARD_FORCE * _jumpForce);		
 	}
 
 	else
 	{
 		_isJumping = false;
-		_jumpTime = JUMP_TIME;
+		_jumpTime = JUMP_TIME;		
+	}
+
+	// fall
+	if (_rigidBody->Velocity().Y > 0 && !_isGrounded)
+		_isFalling = true;
+
+	else
+		_isFalling = false;
+
+	// attack timer
+	if (_isAttacking && _attackTime > 0)
+		_attackTime -= dt;
+
+	else
+	{
+		_isAttacking = false;
+		_attackTime = ATTACK_TIME;
 	}
 
 	//move on x axis
@@ -103,7 +123,30 @@ void Warrior::Update(float dt)
 	_origin->X = _transform->X + _width / 2;
 	_origin->Y = _transform->Y + _height / 2;
 
+	AnimationState();
 	_animation->Update();
+}
+
+void Warrior::AnimationState()
+{
+	// idle
+	_animation->SetProps(_textureID, 0, 6, 60);
+
+	// attacking
+	if (_isAttacking)
+		_animation->SetProps(_textureID, 1, 6, 60);
+
+	// running
+	if(_isRunning)
+		_animation->SetProps(_textureID, 2, 8, 60);
+
+	// jumping
+	if (_isJumping)
+		_animation->SetProps(_textureID, 3, 8, 60);
+
+	// falling
+	if (_isFalling)
+		_animation->SetProps(_textureID, 4, 8, 60);
 }
 
 void Warrior::Clean()
