@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <textures>
-	<texture id="player" source="res/img/oak_wood/character/char_blue.png"/>
-	<texture id="background_layer_1" source="res/img/oak_wood/background/background_layer_1.png"/>
-	<texture id="background_layer_2" source="res/img/oak_wood/background/background_layer_2.png"/>
-	<texture id="background_layer_3" source="res/img/oak_wood/background/background_layer_3.png"/>
+	<texture id="player" source="D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img\\oak_wood\\character\\char_blue.png"/>
+	<texture id="background_layer_1" source="D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img\\oak_wood\\background\\background_layer_1.png"/>
+	<texture id="background_layer_2" source="D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img\\oak_wood\\background\\background_layer_2.png"/>
+	<texture id="background_layer_3" source="D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img\\oak_wood\\background\\background_layer_3.png"/>
 	<texture id="windrise" source="res/img/oak_wood/background/windrise-background.png"/>
 	<texture id="windrise_4k" source="res/img/oak_wood/background/windrise-background-4k.png"/>
 	

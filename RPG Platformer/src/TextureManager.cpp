@@ -8,7 +8,7 @@ SDL_Texture* TextureManager::LoadTexture(std::string id, std::string filename)
     _texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), filename.c_str());
 
     if (_texture == nullptr)
-        std::cout << "Failed to load the texture. Error: " << SDL_GetError() << id << std::endl;
+        std::cout << "Failed to load the texture. Error: " << SDL_GetError() << " " << id << std::endl;
 
     _textureMap[id] = this->_texture;
 
@@ -60,7 +60,7 @@ void TextureManager::Draw(std::string id, int x, int y, int width, int height, f
 {
     Vector2D cam = Camera::GetInstance()->GetPosition() * scroll;
     SDL_Rect src = { 0, 0, width, height };
-    SDL_Rect dst = { x - cam.X, y - cam.Y, width, height };
+    SDL_Rect dst = { x - cam.X, y - cam.Y , width, height };
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), _textureMap[id], &src, &dst, 0, NULL, flip);
 }
 

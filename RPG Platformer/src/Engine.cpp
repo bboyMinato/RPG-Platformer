@@ -33,7 +33,7 @@ void Engine::Init()
 
 	_levelMap = MapParser::GetInstance()->GetMap("Level");
 
-	TextureManager::GetInstance()->ParseTextures("res/img/oak_wood/textures.xml");	
+	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img/oak_wood\\textures.xml");	
 
 	player = new Warrior(new Properties("player", 100, 200, 56, 56));
 

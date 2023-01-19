@@ -11,7 +11,7 @@ MapParser* MapParser::GetInstance()
 
 bool MapParser::Load()
 {
-    if (!Parse("Level", "D:/Programming/BrickBreaker/BrickBreaker/res/map/map.tmx"))
+    if (!Parse("Level", "D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\map\\map.tmx"))
         return false;
 
     return true;

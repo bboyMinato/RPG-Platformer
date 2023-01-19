@@ -3,6 +3,7 @@
 #include <map>
 #include "SDL.h"
 
+
 class TextureManager
 {
 public:
