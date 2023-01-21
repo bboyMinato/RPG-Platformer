@@ -13,8 +13,8 @@ public:
 	bool ParseTextures(std::string source);
 	void Drop(std::string id);
 	void Clean();
-	
-	void Draw(std::string id, int x, int y, int width, int height, float scroll = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+	void Draw(std::string id, int x, int y, int width, int height, float scroll = 1, float xScale = 1, float yScale = 1, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame, float scale = 1, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void DrawTile(std::string tilesetID, int tileSize, int x, int y, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
 

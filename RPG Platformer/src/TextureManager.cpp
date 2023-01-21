@@ -56,11 +56,11 @@ void TextureManager::Clean()
     _textureMap.clear();
 }
 
-void TextureManager::Draw(std::string id, int x, int y, int width, int height, float scroll, SDL_RendererFlip flip)
+void TextureManager::Draw(std::string id, int x, int y, int width, int height, float scroll, float xScale, float yScale, SDL_RendererFlip flip)
 {
     Vector2D cam = Camera::GetInstance()->GetPosition() * scroll;
     SDL_Rect src = { 0, 0, width, height };
-    SDL_Rect dst = { x - cam.X, y - cam.Y , width, height };
+    SDL_Rect dst = { x - cam.X, y - cam.Y , width * xScale, height * yScale };
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), _textureMap[id], &src, &dst, 0, NULL, flip);
 }
 
@@ -69,7 +69,7 @@ void TextureManager::DrawFrame(std::string id, int x, int y, int width, int heig
     Vector2D cam = Camera::GetInstance()->GetPosition();
     SDL_Rect srcRect = { width * frame, height * row, width, height };
     SDL_Rect dstRect = { x - cam.X, y - cam.Y, width * scale, height * scale };
-    SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), _textureMap[id], &srcRect, &dstRect, 0, NULL, flip);
+    SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), _textureMap[id], &srcRect, &dstRect, 0, NULL, flip);   
 }
 
 void TextureManager::DrawTile(std::string tilesetID, int tileSize, int x, int y, int row, int col, SDL_RendererFlip flip)

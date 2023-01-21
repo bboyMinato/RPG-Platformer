@@ -4,9 +4,9 @@
 #include "../include/Input.h"
 #include "../include/Timer.h"
 #include "../include/Camera.h"
+#include "../include/Enemy.h"
 
 Engine* Engine::_instance = nullptr;
-Warrior* player = nullptr;
 
 void Engine::Init()
 {
@@ -33,9 +33,13 @@ void Engine::Init()
 
 	_levelMap = MapParser::GetInstance()->GetMap("Level");
 
-	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\img/oak_wood\\textures.xml");	
+	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\textures.xml");	
+	
+	Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));
+	_gameObjects.push_back(player);
 
-	player = new Warrior(new Properties("player", 100, 200, 56, 56));
+	Enemy* boar = new Enemy(new Properties("boar_idle", 500, 100, 48, 32));
+	_gameObjects.push_back(boar);
 
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
 }
@@ -60,7 +64,12 @@ void Engine::Update()
 {
 	float dt = Timer::GetInstance()->GetDeltaTime();
 	_levelMap->Update();
-	player->Update(dt);
+
+	for (size_t i = 0; i < _gameObjects.size();i++)
+	{
+		_gameObjects[i]->Update(dt);
+	}
+
 	Camera::GetInstance()->Update(dt);
 }
 
@@ -71,10 +80,14 @@ void Engine::Render()
 
 	TextureManager::GetInstance()->Draw("background_layer_1", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.2);
 	TextureManager::GetInstance()->Draw("background_layer_2", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.3);
-	TextureManager::GetInstance()->Draw("background_layer_3", 0, 0, SCREEN_WIDTH + 500, SCREEN_HEIGHT, 0.4);
-
+	TextureManager::GetInstance()->Draw("background_layer_3", 0, 0, SCREEN_WIDTH + 1000, SCREEN_HEIGHT, 0.4);
+	
 	_levelMap->Render();
-	player->Draw();
+	
+	for (size_t i = 0; i < _gameObjects.size();i++)
+	{
+		_gameObjects[i]->Draw();
+	}
 
 	SDL_RenderPresent(_renderer);
 }
