@@ -53,7 +53,7 @@ void Engine::Clean()
 
 	for (size_t i = 0; i < _gameObjects.size();i++)
 	{
-		_gameObjects[i]->Clean();
+		delete _gameObjects[i];
 	}
 
 	SDL_DestroyRenderer(_renderer);
