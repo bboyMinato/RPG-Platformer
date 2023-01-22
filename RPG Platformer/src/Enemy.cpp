@@ -31,6 +31,7 @@ void Enemy::Update(float dt)
 	_transform->X += _rigidBody->Position().X;
 	_collider->Set(_transform->X, _transform->Y, 48, 32);
 
+
 	if (_collider->CollidingWithMap())
 		_transform->X = _lastSafePosition.X;
 
@@ -47,6 +48,9 @@ void Enemy::Update(float dt)
 		_isGrounded = true;
 		_transform->Y = _lastSafePosition.Y;
 	}
+		
+	/*_origin->X = _transform->X + (float)_width / 2;
+	_origin->Y = _transform->Y + (float)_height / 2;*/
 
 	_animation->Update();
 }

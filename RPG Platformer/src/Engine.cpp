@@ -35,16 +35,13 @@ void Engine::Init()
 
 	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\textures.xml");	
 	
-	Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));
+	Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));	
 	_gameObjects.push_back(player);
 
 	Enemy* boar = new Enemy(new Properties("boar_idle", 500, 100, 48, 32));
 	_gameObjects.push_back(boar);
 
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
-
-	GameObject* game = new Warrior(new Properties("player_purple", 150, 200, 56, 56));
-	_gameObjects.push_back(game);
 }
 
 void Engine::Clean()
@@ -76,6 +73,7 @@ void Engine::Update()
 	for (size_t i = 0; i < _gameObjects.size();i++)
 	{
 		_gameObjects[i]->Update(dt);
+		
 	}
 
 	Camera::GetInstance()->Update(dt);
