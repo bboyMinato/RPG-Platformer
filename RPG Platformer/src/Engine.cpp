@@ -42,11 +42,19 @@ void Engine::Init()
 	_gameObjects.push_back(boar);
 
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
+
+	GameObject* game = new Warrior(new Properties("player_purple", 150, 200, 56, 56));
+	_gameObjects.push_back(game);
 }
 
 void Engine::Clean()
 {
 	TextureManager::GetInstance()->Clean();
+
+	for (size_t i = 0; i < _gameObjects.size();i++)
+	{
+		_gameObjects[i]->Clean();
+	}
 
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
