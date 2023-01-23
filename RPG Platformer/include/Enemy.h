@@ -16,6 +16,7 @@ public:
 	virtual void Clean();
 
 	void AnimationState();
+	inline Collider* GetCollider() { return _collider; }
 
 private:
 	bool _isGrounded = false;

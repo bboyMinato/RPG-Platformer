@@ -152,7 +152,7 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MapParser.cpp" />
-    <ClCompile Include="src\ObjectFactory.cpp" />
+    <ClCompile Include="src\ObjectManager.cpp" />
     <ClCompile Include="src\SeqAnimation.cpp" />
     <ClCompile Include="src\SpriteAnimation.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
@@ -178,7 +178,7 @@
     <ClInclude Include="include\Layer.h" />
     <ClInclude Include="include\MapParser.h" />
     <ClInclude Include="include\Object.h" />
-    <ClInclude Include="include\ObjectFactory.h" />
+    <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\Point.h" />
     <ClInclude Include="include\RigidBody.h" />
     <ClInclude Include="include\SeqAnimation.h" />

@@ -3,6 +3,9 @@
 #include "../include/Input.h"
 #include "../include/CollisionHandler.h"
 #include "../include/Engine.h"
+#include "../include/ObjectManager.h"
+
+static RegisterObject<Warrior> registerobject("PLAYER");
 
 Warrior::Warrior(Properties* props) : Character(props)
 {
@@ -164,7 +167,7 @@ void Warrior::Update(float dt)
 		_isJumping = false;
 		_isGrounded = false;
 		_isFalling = true;		
-	}	
+	}	 	
 
 	_origin->X = _transform->X + _width / 2;
 	_origin->Y = _transform->Y + _height / 2;

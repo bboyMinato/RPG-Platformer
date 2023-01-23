@@ -49,8 +49,8 @@ void Enemy::Update(float dt)
 		_transform->Y = _lastSafePosition.Y;
 	}
 		
-	/*_origin->X = _transform->X + (float)_width / 2;
-	_origin->Y = _transform->Y + (float)_height / 2;*/
+	_origin->X = _transform->X + (float)_width / 2;
+	_origin->Y = _transform->Y + (float)_height / 2;
 
 	_animation->Update();
 }

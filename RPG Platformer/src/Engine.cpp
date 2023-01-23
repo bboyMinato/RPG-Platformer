@@ -5,6 +5,7 @@
 #include "../include/Timer.h"
 #include "../include/Camera.h"
 #include "../include/Enemy.h"
+#include "../include/ObjectManager.h"
 
 Engine* Engine::_instance = nullptr;
 
@@ -35,7 +36,9 @@ void Engine::Init()
 
 	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\textures.xml");	
 	
-	Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));	
+	//Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));	
+	Properties* playerProps = new Properties("player_purple", 100, 200, 56, 56);
+	GameObject* player = ObjectManager::GetInstance()->CreateObject("PLAYER", playerProps);	
 	_gameObjects.push_back(player);
 
 	Enemy* boar = new Enemy(new Properties("boar_idle", 500, 100, 48, 32));
@@ -72,8 +75,7 @@ void Engine::Update()
 
 	for (size_t i = 0; i < _gameObjects.size();i++)
 	{
-		_gameObjects[i]->Update(dt);
-		
+		_gameObjects[i]->Update(dt);		
 	}
 
 	Camera::GetInstance()->Update(dt);

@@ -24,6 +24,7 @@ public:
 	virtual void Clean();
 
 	void AnimationState();
+	inline Collider* GetCollider() { return _collider; }
 
 private:
 	bool _isRunning = false;
