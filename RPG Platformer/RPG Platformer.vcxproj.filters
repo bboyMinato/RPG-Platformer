@@ -413,6 +413,9 @@
     <ClInclude Include="include\ObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\oak_wood\background\background_layer_1.png">

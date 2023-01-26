@@ -14,10 +14,10 @@ void Engine::Init()
 	_isRunning = true;
 
 	if (SDL_Init(SDL_INIT_VIDEO) > 0)
-		std::cout << "SDL_Init has failed; " << SDL_GetError() << std::endl;
+		std::cout << "SDL_Init has failed: " << SDL_GetError() << std::endl;
 
 	if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
-		std::cout << "IMG_Init has failed; " << SDL_GetError() << std::endl;
+		std::cout << "IMG_Init has failed: " << SDL_GetError() << std::endl;	
 
 	_window = SDL_CreateWindow("RPG", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -32,16 +32,18 @@ void Engine::Init()
 	if (!MapParser::GetInstance()->Load())
 		std::cout << "Failed to load map!" << std::endl;
 
-	_levelMap = MapParser::GetInstance()->GetMap("Level");
+	_levelMap = MapParser::GetInstance()->GetMap("Level");	
 
 	TextureManager::GetInstance()->ParseTextures("D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\textures.xml");	
-	
+
 	//Warrior* player = new Warrior(new Properties("player_purple", 100, 200, 56, 56));	
 	Properties* playerProps = new Properties("player_purple", 100, 200, 56, 56);
 	GameObject* player = ObjectManager::GetInstance()->CreateObject("PLAYER", playerProps);	
 	_gameObjects.push_back(player);
 
-	Enemy* boar = new Enemy(new Properties("boar_idle", 500, 100, 48, 32));
+	//Enemy* boar = new Enemy(new Properties("boar_idle", 500, 100, 48, 32));
+	Properties* boar_props = new Properties("boar_idle", 500, 100, 48, 32);
+	GameObject* boar = ObjectManager::GetInstance()->CreateObject("BOAR", boar_props);
 	_gameObjects.push_back(boar);
 
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
@@ -60,7 +62,7 @@ void Engine::Clean()
 	SDL_DestroyWindow(_window);
 
 	SDL_Quit();
-	IMG_Quit();
+	IMG_Quit();	
 }
 
 void Engine::Quit()
@@ -78,7 +80,7 @@ void Engine::Update()
 		_gameObjects[i]->Update(dt);		
 	}
 
-	Camera::GetInstance()->Update(dt);
+	Camera::GetInstance()->Update(dt);	
 }
 
 void Engine::Render()

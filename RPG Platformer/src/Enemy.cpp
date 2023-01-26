@@ -1,6 +1,9 @@
 #include "..\include\Enemy.h"
 #include "../include/TextureManager.h"
 #include "../include/CollisionHandler.h"
+#include "../include/ObjectManager.h"
+
+static RegisterObject<Enemy> registerobject("BOAR");
 
 Enemy::Enemy(Properties* props) : Character(props)
 {
