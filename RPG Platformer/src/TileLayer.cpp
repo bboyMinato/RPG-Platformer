@@ -9,9 +9,8 @@ TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, 
 	_tileMap = tilemap;
 	_tileSets = tilesets;
 
-	//TO DO: loads a texture only once - fix texture manager
 	for (size_t i = 0; i < _tileSets.size(); i++)
-		TextureManager::GetInstance()->LoadTexture(_tileSets[i].name, "D:\\Programming\\RPG Platformer\\RPG Platformer\\RPG Platformer\\res\\map\\" + _tileSets[i].source);
+		TextureManager::GetInstance()->LoadTexture(_tileSets[i].name, ".\\res\\map\\" + _tileSets[i].source);
 }
 
 void TileLayer::Render()
